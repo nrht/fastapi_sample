@@ -7,7 +7,7 @@ services:
     container_name: 'fastapi'
     tty: true
     volumes:
-      - ./opt:/usr/src/app
+      - .:/usr/src/app
     ports:
       - 8000:8000
 
