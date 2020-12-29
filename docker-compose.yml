@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  fastapi:
+    restart: always
+    build: .
+    container_name: 'fastapi'
+    tty: true
+    volumes:
+      - ./opt:/usr/src/app
+    ports:
+      - 8000:8000
+
