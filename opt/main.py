@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Optional
-
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer
 
 
 class ModelName(str, Enum):
@@ -11,6 +11,12 @@ class ModelName(str, Enum):
 
 
 app = FastAPI()
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+@app.get("/items/")
+async def read_items(token: str = Depends(oauth2_scheme)):
+    return {"token": token}
 
 
 fake_items_db = [
@@ -73,3 +79,5 @@ async def read_user_item(
             {"description": "This is an amaziong item that has a long description"}
         )
     return item
+
+
