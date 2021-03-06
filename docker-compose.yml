@@ -10,4 +10,18 @@ services:
       - .:/usr/src/app
     ports:
       - 8000:8000
+    depends_on: 
+      - postgres
 
+  postgres:
+    image: postgres:12.1-alpine
+    restart: always
+    environment: 
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
